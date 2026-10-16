@@ -1,112 +1,113 @@
 # Scenario 13 — Minesweeper
 
-A modular terminal Minesweeper game with hidden mines, reveal expansion, and flags.
+A Python-based terminal Minesweeper game enhanced through AI-assisted debugging and feature development.
 
 ## Objective
 
-Inspect the supplied starter, understand how the modules interact, reproduce the
-existing defect, and then extend the game through four tasks. The assignment is
-designed to test debugging, reasoning about state, and careful review of LLM-generated code.
+To inspect and debug the supplied Minesweeper starter code, fix the identified defect, implement the required features, and test the updated application.
 
-## Provided files
+## Project Structure
 
-- `main.py` — entry point.
-- `game.py` — command handling and game flow.
-- `board.py` — board state, neighbours, mines, revealing, and flags.
-- `requirements.txt` — dependency declaration.
+```text
+Lab 4/
+├── README.md
+├── main.py
+├── game.py
+├── board.py
+├── requirements.txt
+├── test_board.py
+├── test_flags_win.py
+├── PES2UG24CS015_LAB_4.pdf
+└── Video/
+    ├── Minesweeper_Original_Before_Fix.mp4
+    └── Minesweeper_Fixed_After_Improvements.mp4
+```
 
-## Setup
+## Requirements
 
-Use Python 3.9 or newer:
+- Python 3.9 or newer
+- No additional package installation is required for the game.
+
+## How to Run
+
+Open a terminal in the project directory and execute:
 
 ```bash
 python main.py
 ```
 
-No package installation is required.
+Select a difficulty when prompted:
 
-## Before changing the code
+- **Easy:** 6 × 6 board with 6 mines
+- **Medium:** 8 × 8 board with 12 mines
+- **Hard:** 10 × 10 board with 20 mines
 
-Run the untouched starter, read all three Python files, play several turns, and trace
-one reveal from the command line through the board logic. Reproduce the Task 1 defect
-before attempting to fix it.
+## Game Controls
 
-## Task 1 — Boundary-safe board traversal
+| Command | Description |
+|---|---|
+| `r row col` | Reveal a cell |
+| `f row col` | Toggle a flag on a cell |
+| `q` | Quit the game |
 
-Correct the neighbour traversal so every coordinate visited by reveal and mine-counting
-logic is a valid board coordinate. Flood-fill must work correctly from corners, edges,
-and interior cells without exceptions or phantom cells.
+Rows and columns are numbered starting from 1 in the terminal interface.
 
-**Done when:** all valid reveals stay within the board and zero-adjacent regions expand
-correctly from every edge and corner.
+## Implemented Tasks
 
-## Task 2 — Complete win and flag behaviour
+### Task 1 — Boundary-Safe Board Traversal
 
-Keep the existing flag command and make the game recognise a win only when every
-non-mine cell has been revealed. Revealing a flagged cell must not accidentally change
-its state.
+Corrected the neighbour traversal condition to ensure that row and column coordinates remain within valid board boundaries.
 
-**Done when:** flags can be toggled, invalid actions do not corrupt state, and a
-complete safe reveal ends the game correctly.
+### Task 2 — Win Detection and Flag Behaviour
 
-## Task 3 — Difficulty modes
+Updated the win condition to ensure that all safe cells are revealed and no mine has been revealed. Flag toggling and protection against revealing flagged cells are preserved.
 
-Add Easy, Medium, and Hard modes with different dimensions and mine counts. The mode
-selection must happen in memory and must not require a new data file.
+### Task 3 — Difficulty Modes
 
-**Done when:** each mode produces a valid board and all existing commands continue to work.
+Added Easy, Medium, and Hard difficulty selection, with different board dimensions and mine counts.
 
-## Task 4 — Action-level feedback
+### Task 4 — Action-Level Feedback
 
-Add concise feedback for a player's reveal action. A single reveal that expands through
-many zero cells should still count as one player action; internal flood-fill iterations
-must not produce repeated player-facing feedback.
+Added concise feedback for player reveal actions, including the adjacent-mine count for safe reveals. Feedback is displayed once per player action rather than for each internal flood-fill iteration.
 
-**Done when:** feedback is tied to actual commands, not internal loops.
+## Testing
 
-## Required testing
+The project includes the following test files:
 
-Test corners, edges, centre cells, zero-adjacent regions, mine hits, repeated reveals,
-flag toggling, invalid coordinates, invalid commands, every difficulty, and a complete win.
+- `test_board.py` — checks neighbour traversal at board corners, edges, and interior cells.
+- `test_flags_win.py` — checks flag toggling, revealing flagged cells, and win detection.
 
+Run the tests using:
 
-## LLM usage
-
-You may use an LLM during the lab. The goal is to use it as a coding assistant while
-retaining responsibility for understanding and testing the result.
-
-- Inspect the existing code before asking for changes.
-- Ask for explanations when you do not understand a proposed change.
-- Test generated code against the stated behaviour and edge cases.
-- Keep your complete LLM chat history for submission.
-- Do not replace the whole project with an unrelated implementation.
-- Keep all state in memory; do not add CSV, JSON, SQLite, or other persistence.
-
-## Submission checklist
-
-- [ ] Task 1 completed and the original defect was reproduced and fixed.
-- [ ] Tasks 2–4 completed and tested.
-- [ ] Boundary and invalid-input cases tested.
-- [ ] No unnecessary external dependencies added.
-- [ ] No persistent storage added.
-- [ ] Code remains understandable and modular.
-- [ ] Complete LLM chat-history link included.
-
-## Folder structure
-
-```text
-scenario-01-minesweeper/
-├── README.md
-├── requirements.txt
-├── main.py
-├── game.py
-└── board.py
+```bash
+python test_board.py
+python test_flags_win.py
 ```
 
-## Submission Checklist
+Additional manual testing covers difficulty selection, invalid coordinates, safe reveals, mine hits, and game completion.
 
-Submission is only the following three things:
+## Before-and-After Demonstration
 
-- [ ] A 10-second video of gameplay **before** your changes, showing the bug/broken behavior
-- [ ] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
-- [ ] The Chat/LLM used page link, with the complete chat history
+The `Video/` folder contains two gameplay recordings:
+
+1. **Original version:** Demonstrates the game before the fixes and feature additions.
+2. **Fixed version:** Demonstrates the updated game, including difficulty selection and reveal feedback.
+
+## AI-Assisted Development
+
+An AI coding assistant was used to help identify defects, propose targeted code changes, and develop the required features. The generated changes were reviewed and tested during implementation.
+
+The accompanying lab report contains the prompts, screenshots, and evidence of the development process.
+
+## Submission Contents
+
+- Updated Python source code
+- Test files
+- Lab report with screenshots and prompts
+- Original gameplay video
+- Fixed gameplay video
+- Complete AI conversation history, as required by the assignment
+
+## Conclusion
+
+The Minesweeper project was updated to address boundary-safe traversal, win detection and flag handling, difficulty selection, and action-level feedback while retaining the existing modular Python structure.
